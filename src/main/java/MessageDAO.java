@@ -4,7 +4,7 @@ import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 
 import java.sql.*;
 
-public final class DatabaseService {
+public final class MessageDAO {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DATABASE = "bfa";
@@ -74,6 +74,6 @@ public final class DatabaseService {
         throw new IllegalStateException();
     }
 
-    private DatabaseService() {
+    private MessageDAO() {
     }
 }
