@@ -1,3 +1,5 @@
+package dao;
+
 import model.Task;
 
 import java.util.ArrayList;
@@ -5,7 +7,7 @@ import java.util.List;
 
 public class TodoDaoMem implements TodoDao {
 
-    // public static final TodoDao INSTANCE = new TodoDaoMem();
+    // public static final dao.TodoDao INSTANCE = new dao.TodoDaoMem();
     private List<Task> tasks;
     private int counter;
 

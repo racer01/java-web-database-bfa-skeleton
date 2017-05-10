@@ -1,10 +1,12 @@
+package dao;
+
 import ch.vorburger.exec.ManagedProcessException;
 import ch.vorburger.mariadb4j.DB;
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 
 import java.sql.*;
 
-public final class MessageDAO {
+public final class MessageDao {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DATABASE = "bfa";
@@ -74,6 +76,6 @@ public final class MessageDAO {
         throw new IllegalStateException();
     }
 
-    private MessageDAO() {
+    private MessageDao() {
     }
 }

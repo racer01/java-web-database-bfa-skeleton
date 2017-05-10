@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
-    <title>TODO</title>
+    <title>TODO Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO app</title>
@@ -17,7 +18,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="index.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -40,29 +40,28 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <form id="newForm">
+        <div class="col-md-2">
+            <c:if test="${errormsg != null}">
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                        ${errormsg}
+                </div>
+            </c:if>
+            <form method="post">
                 <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="user" placeholder="Email" autofocus>
                 </div>
                 <div class="form-group">
-                    <label for="content">Content</label>
-                    <input type="text" class="form-control" id="content" name="content" placeholder="Content" required>
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="pass" placeholder="Password">
                 </div>
-                <button type="button" class="btn btn-default" onclick="addTask()">Add</button>
+                <button type="submit" class="btn btn-default">Login</button>
             </form>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default"
-                        onclick="loadTasks()"><span class="glyphicon glyphicon-refresh"></span></button>
-            </div>
-            <ul class="list-group" id="todoList">
-            </ul>
-        </div>
     </div>
 </div>
 </body>

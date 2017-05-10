@@ -5,16 +5,24 @@ $(document).ready(function () {
 });
 
 function addTask() {
-    $.post("todo", $("#newForm").serialize());
-    document.getElementById("newForm").reset();
-    loadTasks();
+    let requiredItems = document.getElementById('newForm').querySelectorAll("[required]");
+    let validForm = true;
+    requiredItems.forEach(function (item) {
+        if (item.value == '') {
+            validForm = false;
+        }
+    });
+    if (validForm) {
+        $.post('todo', $('#newForm').serialize());
+        document.getElementById('newForm').reset();
+        loadTasks();
+    }
 }
 
 function removeTask(id) {
     $.ajax({
         url: `todo/${id}`,
         type: 'DELETE',
-//        data: JSON.stringify({id: id}),
         success: function () {
             loadTasks();
         }
@@ -54,7 +62,7 @@ function loadTasks() {
             });
         } else {
             htmlList = '<li class="list-group-item list-group-item-info">';
-            htmlList += 'You have done everything you wanted to. Good job!';
+            htmlList += 'You did it! Good job!';
             htmlList += '</li>\n';
         }
         document.getElementById('todoList').innerHTML = htmlList;

@@ -1,3 +1,5 @@
+package dao;
+
 import model.Task;
 
 import javax.servlet.http.HttpSession;
@@ -12,10 +14,13 @@ public class TodoDaoSession implements TodoDao {
     public TodoDaoSession(HttpSession session) {
         //List<Task> tasks
         this.session = session;
-        if (this.session.getAttribute("tasks") == null) {
+        Object tasksObj = this.session.getAttribute("tasks");
+        if (tasksObj == null) {
             this.tasks = new ArrayList<>();
         } else {
-            this.tasks = (List<Task>)this.session.getAttribute("tasks");
+            if (tasksObj instanceof List) {
+                this.tasks = (List<Task>) this.session.getAttribute("tasks");
+            }
         }
         counter = this.tasks.size();
     }
