@@ -15,11 +15,12 @@ public class HiServlet extends HttpServlet {
             String name = req.getParameter("name");
             String lang = req.getParameter("lang");
 
-            String msg = MessageDAO.getMsg(lang);
+            // String msg = MessageDAO.getMsg(lang);
+            String msg = "muthafucka starboi";
             req.setAttribute("msg", String.format(msg, name));
 
             req.getRequestDispatcher("name.jsp").forward(req, resp);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServletException(e);
         }
     }

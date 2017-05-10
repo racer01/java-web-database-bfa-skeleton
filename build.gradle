@@ -3,6 +3,7 @@ plugins {
 }
 
 apply plugin: 'war'
+apply plugin: 'idea'
 
 repositories {
     jcenter()
@@ -12,7 +13,9 @@ repositories {
 dependencies {
     compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'org.webjars:jquery:3.2.0'
+    compile 'com.google.code.gson:gson:2.8.0'
     compile 'ch.vorburger.mariaDB4j:mariaDB4j:2.2.3'
+    compile 'javax.servlet:jstl:1.2'
     runtime 'org.slf4j:slf4j-simple:1.7.25'
     runtime 'mysql:mysql-connector-java:6.0.6'
 }
