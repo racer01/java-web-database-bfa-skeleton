@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public final class ConnectionUtil {
 
     public enum DatabaseName {
-
-        TEST,
-        BFA
+        test,
+        bfa,
+        rcrTodo
     }
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -31,7 +31,7 @@ public final class ConnectionUtil {
             "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=%s&serverTimezone=%s",
             DATABASE_HOST,
             DATABASE_PORT,
-            databaseName.name().toLowerCase(),
+            databaseName.name(),
             "UTF-8",
             "Europe/Budapest");
     }

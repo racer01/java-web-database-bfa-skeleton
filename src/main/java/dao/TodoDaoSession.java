@@ -26,7 +26,7 @@ public class TodoDaoSession implements TodoDao {
     }
 
     @Override
-    public Task getTask(int id) {
+    public Task getTask(int id, int userid) {
         for (Task task : tasks) {
             if (task.getId() == id) {
                 return task;
@@ -36,8 +36,8 @@ public class TodoDaoSession implements TodoDao {
     }
 
     @Override
-    public Task addTask(String title, String content) {
-        Task newTask = new Task(counter, title, content);
+    public Task addTask(String newTitle, String newContent, int userid) {
+        Task newTask = new Task(counter, newTitle, newContent, userid);
         tasks.add(newTask);
         counter += 1;
         session.setAttribute("tasks", tasks);
@@ -45,8 +45,8 @@ public class TodoDaoSession implements TodoDao {
     }
 
     @Override
-    public Task deleteTask(int id) {
-        Task removedTask = getTask(id);
+    public Task deleteTask(int id, int userid) {
+        Task removedTask = getTask(id, userid);
         if (removedTask != null) {
             tasks.remove(removedTask);
         }
@@ -55,42 +55,42 @@ public class TodoDaoSession implements TodoDao {
     }
 
     @Override
-    public Task updateTask(int id, String title, String content, Boolean done) {
-        Task updatedTask = getTask(id);
-        if (title != null) {
-            updatedTask.setTitle(title);
+    public Task updateTask(int id, String newTitle, String newContent, Integer newStatus, int newUserid) {
+        Task updatedTask = getTask(id, newUserid);
+        if (newTitle != null) {
+            updatedTask.setTitle(newTitle);
         }
-        if (content != null) {
-            updatedTask.setContent(content);
+        if (newContent != null) {
+            updatedTask.setContent(newContent);
         }
-        if (done != null) {
-            updatedTask.setDone(done);
+        if (newStatus != null) {
+            updatedTask.setStatus(newStatus);
         }
         session.setAttribute("tasks", tasks);
         return updatedTask;
     }
 
     @Override
-    public Task toggleTask(int id) {
-        Task task = getTask(id);
-        task.setDone(!task.isDone());
+    public Task toggleTask(int id, int userid) {
+        Task task = getTask(id, userid);
+        task.toggleStatus();
         session.setAttribute("tasks", tasks);
         return task;
     }
 
     @Override
-    public List<Task> listTasks() {
-        return listTasks(null, null, null, null);
+    public List<Task> listTasks(int userid) {
+        return listTasks(null, null, null, null, userid);
     }
 
     @Override
-    public List<Task> listTasks(Integer id, String title, String content, Boolean isDone) {
+    public List<Task> listTasks(Integer filterId, String filterTitle, String filterContent, Integer filterStatus, int filterUserId) {
         List<Task> filteredList = new ArrayList<>();
         for (Task task : tasks) {
-            if ((id == null || id.equals(task.getId()))
-                && (title == null || title.equals(task.getTitle()))
-                && (content == null || content.equals(task.getContent()))
-                && (isDone == null || isDone.equals(task.isDone()))) {
+            if ((filterId == null || filterId.equals(task.getId()))
+                && (filterTitle == null || filterTitle.equals(task.getTitle()))
+                && (filterContent == null || filterContent.equals(task.getContent()))
+                && (filterStatus == null || filterStatus.equals(task.getStatusValue()))) {
                 filteredList.add(task);
             }
         }

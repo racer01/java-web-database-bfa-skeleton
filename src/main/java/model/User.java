@@ -1,47 +1,26 @@
-package model;import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+package model;
 
 public class User {
-    private String name;
+    private int id;
     private String username;
-    private String pass;
-    private List<String> writings;
+    private String password;
 
-    public User(String username, String pass) {
+    public User(int id, String username, String password) {
+        this.id = id;
         this.username = username;
-        this.pass = pass;
-    }
-
-    public User(String name, String username, String pass) {
-        this.name = name;
-        this.username = username;
-        this.pass = pass;
-    }
-
-    public String getName() {
-        return name;
+        this.password = password;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void loadWritings(String filename) {
-        try {
-            Type type = new TypeToken<ArrayList<String>>() {}.getType();
-            Gson gson = new Gson();
-            JsonReader reader = new JsonReader(new FileReader(filename));
-            writings = gson.fromJson(reader, type);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public String getPassword() {
+        return password;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -51,13 +30,13 @@ public class User {
 
         User user = (User) o;
 
-        return username.equals(user.username) && pass.equals(user.pass);
+        return username.equals(user.username) && password.equals(user.password);
     }
 
     @Override
     public int hashCode() {
         int result = username.hashCode();
-        result = 31 * result + pass.hashCode();
+        result = 31 * result + password.hashCode();
         return result;
     }
 }

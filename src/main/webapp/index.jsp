@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <title>TODO</title>
@@ -33,7 +34,13 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">TODO app</a>
+                        <a class="navbar-brand" href="">TODO app</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div class="navbar-right">
+                            <p class="navbar-text">Signed in as ${auth.username}</p>
+                            <a class="btn btn-default navbar-btn" href="login">Log Out</a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -44,13 +51,13 @@
             <form id="newForm">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Title" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
                     <input type="text" class="form-control" id="content" name="content" placeholder="Content" required>
                 </div>
-                <button type="button" class="btn btn-default" onclick="addTask()">Add</button>
+                <button type="button" class="btn btn-default" id="addbtn" onclick="addTask()">Add</button>
             </form>
         </div>
     </div>

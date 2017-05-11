@@ -18,6 +18,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <script src="./sha1.min.js"></script>
+    <script src="./login.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -33,7 +35,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">TODO app</a>
+                        <a class="navbar-brand" href="">TODO app</a>
                     </div>
                 </div>
             </nav>
@@ -41,23 +43,49 @@
     </div>
     <div class="row">
         <div class="col-md-2">
-            <c:if test="${errormsg != null}">
+            <c:if test="${errortype == 'loginerror'}">
+                <c:set var="loginClass" value="has-error" />
                 <div class="alert alert-danger" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Error:</span>
                         ${errormsg}
                 </div>
             </c:if>
-            <form method="post">
+            <form id="loginform" method="post" class="${loginClass}">
+                <input name="method" value="login" hidden>
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="user" placeholder="Email" autofocus>
+                    <label class="control-label" for="loginuser">Username</label>
+                    <input type="text" class="form-control" id="loginuser" name="user" placeholder="Username" autofocus>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="pass" placeholder="Password">
+                    <label class="control-label" for="loginpass">Password</label>
+                    <input type="password" class="form-control" id="loginpass" name="pass" placeholder="Password">
                 </div>
-                <button type="submit" class="btn btn-default">Login</button>
+                <button type="button" class="btn btn-default" id="loginbtn" onclick="login()">Login</button>
+            </form>
+        </div>
+
+        <div class="col-md-2">
+            <c:if test="${errortype == 'regerror'}">
+                <c:set var="regClass" value="has-error" />
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                        ${errormsg}
+                </div>
+            </c:if>
+            <form id="regform" method="post" class="${regClass}">
+                <input name="method" value="register" hidden>
+                <div class="form-group">
+                    <label class="control-label" for="reguser">Username</label>
+                    <input type="text" class="form-control" id="reguser" name="user" placeholder="Username"
+                           autofocus>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="regpass">Password</label>
+                    <input type="password" class="form-control" id="regpass" name="pass" placeholder="Password">
+                </div>
+                <button type="button" class="btn btn-default" id="regbtn" onclick="register()">Register</button>
             </form>
         </div>
     </div>
